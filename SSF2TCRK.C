@@ -28,19 +28,19 @@ int main() {
 
     buf = (unsigned char *)malloc(BUFFER_SIZE);
     if (buf == NULL) {
-				printf("Error:Memory allocation failed.\n");
+		printf("Error:Memory allocation failed.\n");
         return 1;
     }
 
     f = fopen(TARGET_FILE, "rb+");
     if (f == NULL) {
-				printf("Error: Cannot open %s\n", TARGET_FILE);
-				printf("Make sure the patcher is in the game folder.\n");
+		printf("Error: Cannot open %s\n", TARGET_FILE);
+		printf("Make sure the patcher is in the game folder.\n");
         free(buf);
         return 1;
     }
 
-		printf("Scanning %s...\n", TARGET_FILE);
+	printf("Scanning %s...\n", TARGET_FILE);
 
     while (!feof(f)) {
         file_pos = ftell(f);
@@ -59,13 +59,12 @@ int main() {
 
             if (found) {
                 long patch_pos = file_pos + i + PATCH_OFFSET_IN_PATTERN;
-								printf("[+] Protection code found at physical offset: 0x%lX\n", patch_pos);
+				printf("[+] Protection code found at physical offset: 0x%lX\n", patch_pos);
 
                 fseek(f, patch_pos, SEEK_SET);
-
                 fwrite(patch, 1, PATCH_LEN, f);
 
-								printf("[+] Version identified and successfully patched!\n");
+				printf("[+] Version identified and successfully patched!\n");
                 break;
             }
         }
@@ -78,7 +77,7 @@ int main() {
     }
 
     if (!found) {
-				printf("[-] Error: Signature not found. Unknown version or already patched.\n");
+		printf("[-] Error: Signature not found. Unknown version or already patched.\n");
     }
 
     fclose(f);
