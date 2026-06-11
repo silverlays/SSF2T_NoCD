@@ -24,7 +24,7 @@ int main() {
     int found = 0;
 
     printf("Super Street Fighter II Turbo -- Universal NoCD Patcher\n");
-		printf("-------------------------------------------------------\n");
+	printf("-------------------------------------------------------\n");
 
     buf = (unsigned char *)malloc(BUFFER_SIZE);
     if (buf == NULL) {
